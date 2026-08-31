@@ -1,0 +1,46 @@
+p.verso {
+    color: blue;
+}
+
+p.mote {
+    color: red;
+}
+
+a:link {
+    color: blue;
+}
+
+a:hover {
+    color: orange;
+}
+
+a:visited {
+    color: red;
+}
+
+img.circulo{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+table {
+    width: 20%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+td, th {
+    border: 1px solid black;
+}
+
+th {
+    padding: 5px;
+    color: white;
+    background-color: darkblue;
+    
+}
+
+td {
+    text-align: center;
+}
