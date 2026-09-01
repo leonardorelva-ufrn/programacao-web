@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Site</title>
 </head>
 <body>
-    <div>Carregando cerveja...</div>
+    <div><button id="botaoCarregar">Carregando cerveja...</button></div>
+    <div id="meu-amor"></div>
 </body>
+<script>
+    function carregarDiv(){
+        let div = document.getElementById("meu-amor")
+        
+        if (div.innerHTML !== ""){
+            div.classList.add("escondido");
+
+            setTimeout(() => {
+                div.innerHTML = "";
+            }, 500);
+        }
+
+        else {
+            div.innerHTML = "<h1>Guinness</h1>";
+
+            setTimeout(() => {
+                div.classList.remove("escondido");
+            }, 10);
+        }
+    }
+
+    let botao = document.getElementById("botaoCarregar")
+    botao.addEventListener("click", carregarDiv)
+</script>
 </html>

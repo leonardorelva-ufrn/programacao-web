@@ -1,0 +1,8 @@
+#meu-amor {
+    opacity: 1;
+    transition: opacity 0.5 ease-in-out;
+}
+
+.escondido {
+    opacity: 0 !important;
+}
