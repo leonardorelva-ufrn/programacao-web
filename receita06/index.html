@@ -18,30 +18,47 @@
 
             {
                 name : "Guinness",
-                alcohol: "10%"
+                alcohol: "10%",
+                style: "Imperial Stout",
+                ibu: "45"
             },
 
             {
                 name: "Desperados",
-                alcohol: "6%"
+                alcohol: "6%",
+                style: "Lager",
+                ibu: "20"
             },
 
             {
                 name: "Becks",
-                alcohol: "5%"
+                alcohol: "5%",
+                style: "Pilsen",
+                ibu: "25"
             }
 
         ]
 
-        const carregarDiv = cs => {
-            const div = document.getElementById("cervejasDiv")
-            const itensHtml = cs.map( item => `<tr><td>${item['name']}</td><td>${item['alcohol']}</td></tr>` )
+        const carregarDiv = (
+            cs,
+            elementId = "cervejasDiv",
+            headeres = ["Nome", "Álcool", "Estilo", "Amargor"],
+            props = ["name", "alcohol", "style", "ibu"]
+        ) => {
+
+            const div = document.getElementById(elementId)
+            const itensHtml = cs.map( item => `
+                <tr>
+                    ${props.map(p => `<td>${item[p]}</td>`).join("")}
+                </tr>
+            `)
+            const thsHtml = headeres.map(h => `<th>${h}</th>`).join("")
+
             div.innerHTML = `
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>Álcool</th>
+                            ${thsHtml}
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +69,7 @@
         }
 
         let botao = document.getElementById("botaoCarregar")
-        botao.addEventListener("click", () => carregarDiv(cervejas) )  
+        botao.addEventListener("click", () => carregarDiv(cervejas)) 
 
     </script>
 </html>
