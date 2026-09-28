@@ -8,25 +8,36 @@
 
     <body>
         <div><button id="botaoCarregar">Carregando cervejas...</button></div>
-        <div id="cervejasDiv"></div> 
+        <div id="pokemonsDiv"></div> 
     </body>
 
     <script>
 
-        let cervejas = [
-            {name: "Founders Breakfast Stout", alcohol: "7.6%" },
-            {name: "Celebrator Doppelbock", alcohol: "3.1%"},
-            {name: "Dreadnaught", alcohol: "6.1%" }
-        ]
+        let pokemons = []
 
-        const carregarDiv = cs => {
-            const div = document.getElementById("cervejasDiv")
-            const itensHtml = cs.map( ({name,alcohol}) => `<div>${name} -- ${alcohol}</div>` ) 
-            div.innerHTML = `${itensHtml.join("\n")}`
+        const carregarDiv = lista => {
+            const div = document.getElementById("pokemonsDiv")
+            const itensHtml = lista.map( ({name, weight, height}) => {
+                const tipos = types.map(t => t.type.name).join(", ")
+                return `<div><strong>${name.toUpperCase()}</strong> -- Peso: ${weight} | Altura: ${height}`
+            })
+            div.innerHTML = itensHtml.join("\n")
+        }
+
+        async function carregarPokemons(){
+            try{
+                let res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20")
+                let dados = await res.json()
+                let promessasDetalhes = dados.results.map(p => fetch(p.url).then(r => r.json()))
+                
+                pokemons = await Promise.all(promessasDetalhes)
+            }catch(err){
+                document.getElementById("pokemonsDiv").innerHTML = "Ocorreu um erro ao carregar."
+            }
         }
 
         let botao = document.getElementById("botaoCarregar")
-        botao.addEventListener("click", () => carregarDiv(cervejas) )
+        botao.addEventListener("click", () => carregarPokemons())
 
     </script>
 </html>
